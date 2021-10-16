@@ -62,18 +62,44 @@
       deleteButton,
     }
   }
-  
+
   document.addEventListener('DOMContentLoaded', function() {
     let container = document.getElementById('todo-app');
 
     let todoAppTitle = createAppTitle('Список дел');
     let todoItemForm = createTodoItemForm();
     let todoList = createTodoList();
+    
 
     container.append(todoAppTitle);
     container.append(todoItemForm.form);
     container.append(todoList);
+    
+    todoItemForm.form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
+
+      if(!todoItemForm.input.value) {
+        return;
+      }
+
+      let todoItem = createTodoItem(todoItemForm.input.value);
+      
+      todoItem.doneButton.addEventListener('click', function() {
+        todoItem.item.classList.toggle('list-group-item-success');
+      });
+      todoItem.deleteButton.addEventListener('click', function() {
+        if (confirm('Вы уверены?')) {
+          todoItem.item.remove();
+        }
+      });
+      
+      
+      todoList.append(todoItem.item);
+      
+      
+      todoItemForm.input.value = '';
+    })
   })
 
 })();
