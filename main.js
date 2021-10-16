@@ -47,6 +47,32 @@
     container.append(todoItemForm.form);
     container.append(todoList);
 
+  function createTodoItem(name) {
+    let item = document.createElement('li');
+
+    let buttonGroup = document.createElement('div');
+    let doneButton = document.createElement('button');
+    let deleteButton = document.createElement('button');
+
+    item.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+    item.textContent = name;
+
+    buttonGroup.classList.add('btn-group', 'btn-group-sm');
+    doneButton.classList.add('btn', 'btn-success');
+    doneButton.textContent = 'Готово';
+    deleteButton.classList.add('btn', 'btn-danger');
+    deleteButton.textContent = 'Удалить';
+
+    buttonGroup.append(doneButton);
+    buttonGroup.append(deleteButton);
+    item.append(buttonGroup);
+
+    return {
+      item,
+      doneButton,
+      deleteButton,
+    }
+  }
   })
 
 })();
